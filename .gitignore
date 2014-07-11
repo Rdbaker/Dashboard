@@ -1,0 +1,6 @@
+db/
+log/
+notes
+tmp/
+authentication.yml
+*DS_Store
