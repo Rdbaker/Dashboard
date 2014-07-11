@@ -1,5 +1,4 @@
 class APIRequestService
-  @@auth = YAML.load_file("#{Rails.root}/authentication.yml")
   def api_request(url, params = {})
     url = "#{url}?#{params.to_param}" unless params.empty?
 

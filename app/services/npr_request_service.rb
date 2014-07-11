@@ -2,7 +2,7 @@ class NPRRequestService < APIRequestService
   def initialize
     @url = "http://api.npr.org/query"
     @params = {
-      :apiKey     => @@auth['npr']['apikey'],
+      :apiKey     => ENV['NPR_APIKEY'],
       :format     => "json",
       :numResults => "10"
     }
