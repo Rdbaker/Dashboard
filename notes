@@ -1,0 +1,25 @@
+How will this work?
+Good question. I'll try to answer it as I go along during my work through this
+
+------------- first log ------------------
+
+Firstly, I'll try to make it a SPA. To do that I'll have a single page. What I'm thinking now is that there'll be one controller
+(dashboard_controller) which will take care of all the other controllers and their respective partials.
+
+-------------- second log ----------------
+
+The dashboard_controller now displays only an #index page. That page has some javascirpt which is called on document.ready and kicks off
+a request to /api/home (Articles#home) which then returns all the articles. Right now there are no articles. My current idea of an architecture
+for this is as follows:
+
+AJAX request for all Articles --> Articles#home tells all configured API accessors to get data --> API accessors get data and clean it into articles --> Articles#home conglomerates all data and gives it to Dashboard#index
+
+I can simplify this and just ask Articles#home to ask Articles#<source> to get the data, but I need some API key. I already added 'authentication.yml'
+to my gitignore so I need to figure out how to load YAML files. It would be good if I could create a rake task for this.
+
+- create rake task to read authentication.yml
+- put something in authentication.yml
+- access API from Articles#<source>
+
+after speaking to Jeremy he suggested that I use the 'services' as a way to call an external API. These services should inherit from a base
+InternalRequestService class, just like we do in PM
