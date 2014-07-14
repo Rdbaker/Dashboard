@@ -4,3 +4,4 @@ class RedditRequestService < APIRequestService
 
   def make_request
   end
+end
