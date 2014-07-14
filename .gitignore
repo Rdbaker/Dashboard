@@ -1,5 +1,4 @@
 log/
-db/schema*
 notes
 tmp/
 *DS_Store
