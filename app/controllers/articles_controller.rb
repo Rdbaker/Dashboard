@@ -1,11 +1,13 @@
 class ArticlesController < ApplicationController
   def home
+    nprfeed()
     render :json => Article.all
   end
 
   def nprfeed
     n = NPRRequestService.new()
     n.technology_topic()
-    p n.make_request()
+    n.digital_topic()
+    n.make_request()
   end
 end
