@@ -31,7 +31,7 @@ class NPRRequestService < APIRequestService
       a.title = story["title"]["$text"]
       a.source = "NPR"
       a.link = story["link"][0]["$text"]
-      a.feed = get_feed(a.link)
+      a.feed = get_feed()
       a.date_posted = story["storyDate"]["$text"]
       a.content = get_story_text(story)
       if !overlapping(a)
@@ -41,7 +41,7 @@ class NPRRequestService < APIRequestService
   end
 
   def add_id(params, id)
-    if params.has_key?(id)
+    if params.has_key?(:id)
       params[:id] = params[:id] + ",#{id}"
     else
       params[:id] = id
@@ -76,8 +76,21 @@ class NPRRequestService < APIRequestService
   end
 
   # parse the topic from the url of the story
-  def get_feed(url)
-    CGI.parse(url)["f"][0]
+  def get_feed()
+    feed_map = {
+      '1019' => 'Technology',
+      '1049' => 'Digital Life'
+    }
+    temp = ''
+    feed = @params[:id].split(',')
+    feed.each_with_index do |f, index|
+      if index == 0
+        temp = feed_map[f]
+      else
+        temp += '/'+feed_map[f]
+      end
+    end
+    temp
   end
 
   def delete_existing
