@@ -2,21 +2,20 @@ $ ->
 
   class Dashboard.Views.ArticlesView extends Backbone.View
     initialize: () ->
-      data = @getFeed()
-      @appendToTable(data)
+      @getFeed(@appendToTable)
 
-    getFeed: () ->
+    getFeed: (callback) ->
       $.ajax '/api/home',
         type: 'GET'
         dataType: 'json'
         error: (status) ->
           console.log(status)
         success: (data) ->
-          data
+          callback(data)
 
     appendToTable: (data) ->
       table = $('#feed')
-      for article in data.responseJSON
+      for article in data
         row = $('<tr  />')
         src = article.source
         row.append $("<td>#{article.title}</td>")
