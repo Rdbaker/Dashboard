@@ -49,16 +49,16 @@ class NPRRequestService < APIRequestService
   end
 
   def get_story_text(story)
-    if story.has_key?("textWithHtml")
-      return parse_with_html(story["textWithHtml"])
-    elsif story.has_key?("fullText")
-      # TODO: find a case for this which text_with_html doesn't cover
+    if story.has_key?("fullText")
       return parse_full_text(story["fullText"])
+    elsif story.has_key?("textWithHtml")
+      return parse_with_html(story["textWithHtml"])
     elsif story.has_key?("audio")
       #TODO: real time media play with jPlayer
       # media stream url under: story["audio"]["mediastream"]["$text"]
       return "Sorry, this is an audio story only, which is not currently supported. You should definitely contact Ryan, though, because this is on his Todo list."
     else
+      puts "NPRRequestService::get_story_text: NPR gave me garbage!"
       return "I don't even know what NPR just gave me..."
     end
   end
@@ -66,13 +66,13 @@ class NPRRequestService < APIRequestService
   def parse_with_html(story)
     temp = ""
     story["paragraph"].each do |paragraph|
-      temp += paragraph["$text"] + '\n'
+      temp += "<div>#{paragraph["$text"]}</div>"
     end
     temp
   end
 
   def parse_full_text(story)
-    "I haven't seen this yet, if you do, it's an error and you should tell Ryan. Fixing this is on his Todo list."
+    story["$text"]
   end
 
   # parse the topic from the url of the story
@@ -94,10 +94,7 @@ class NPRRequestService < APIRequestService
   end
 
   def delete_existing
-    ids = @params[:id].split(",")
-    ids.each do |id|
-      Article.where(:feed => id).delete_all
-    end
+    Article.where(:feed => "Technology/Digital Life").delete_all
   end
 
   # sometimes NPR stories fall under

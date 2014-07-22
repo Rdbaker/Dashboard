@@ -15,5 +15,7 @@
 //= require turbolinks
 //= require underscore
 //= require backbone
+//= require bootstrap
+//= require ejs_production
 //= require backbone/dashboard
 //= require_tree .

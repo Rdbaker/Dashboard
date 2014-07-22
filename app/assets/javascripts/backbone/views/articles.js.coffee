@@ -4,7 +4,7 @@ $ ->
     initialize: () ->
       @getFeed(@appendToTable)
 
-    getFeed: (callback) ->
+    getFeed: (callback) =>
       $.ajax '/api/home',
         type: 'GET'
         dataType: 'json'
@@ -13,20 +13,24 @@ $ ->
         success: (data) ->
           callback(data)
 
-    appendToTable: (data) ->
+    appendToTable: (data) =>
       table = $('#feed')
       for article in data
-        row = $('<tr  />')
-        src = article.source
-        row.append $("<td>#{article.title}</td>")
-        row.append $("<td>TODO: pretty picture</td>")
-        row.append $("<td>#{article.feed}</td>")
-        row.append $("<td>#{article.date_posted}</td>")
-        table.append(row)
+        article.date_posted = @formatDate(article)
+        table.append(JST['backbone/templates/articles_view']({article: article}))
+        $('#stories').append(JST['backbone/templates/articles_modal']({article: article}))
 
-    getImageFromSource: (source) ->
+    getImageFromSource: (source) =>
       src_map =
         'NPR': 'assets/npr_logo.jpg'
       src_map[source]
+
+    formatDate: (article) =>
+      if article.source == 'NPR'
+        date = article.date_posted.split(' ')
+        date = date.slice(0, 4)
+        date.join(' ')
+      else
+        article.date
 
   new Dashboard.Views.ArticlesView
