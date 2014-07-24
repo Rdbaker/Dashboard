@@ -24,6 +24,8 @@ class RedditRequestService < APIRequestService
     @subreddits.each do |sub|
       send_to = @url + sub
       res = api_request(send_to, @params)
+      # make articles from response
+    end
   end
 
   private
