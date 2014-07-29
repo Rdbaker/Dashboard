@@ -2,7 +2,7 @@ My Dashboard
 ============
 
 ##This whole project
-Started with a question: 
+Started with a question:
 "Where do you find the libraries and frameworks that you eventually decide to use in your projects?" I asked my mentor.
 
 He told me he keeps up with the community: blog posts, forums, and twitter feeds are just a few of the ways he
@@ -14,7 +14,7 @@ I decided that I could aggregate all my sources of news and make it a one-stop-s
 I decided to gather news from a few sources:
 
 * NPR (done)
-* Reddit
+* Reddit (done)
 * Twitter
 * various blogs (more details later)
 
