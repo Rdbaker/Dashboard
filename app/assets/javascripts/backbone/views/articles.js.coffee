@@ -23,7 +23,8 @@ $ ->
 
     getImageFromSource: (source) =>
       src_map =
-        'NPR': '/npr_logo.jpg'
+        'NPR': '/npr_logo.jpg',
+        'Reddit': '/reddit_logo.png'
       src_map[source]
 
     formatDate: (article) =>
@@ -32,6 +33,6 @@ $ ->
         date = date.slice(0, 4)
         date.join(' ')
       else
-        article.date
+        article.date_posted
 
   new Dashboard.Views.ArticlesView

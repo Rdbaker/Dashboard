@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   def home
     nprfeed()
+    redditfeed()
     render :json => Article.all
   end
 
@@ -9,5 +10,11 @@ class ArticlesController < ApplicationController
     n.technology_topic()
     n.digital_topic()
     n.make_request()
+  end
+
+  def redditfeed
+    r = RedditRequestService.new()
+    r.tech_subs()
+    r.make_request()
   end
 end
