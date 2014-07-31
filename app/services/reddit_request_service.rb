@@ -33,6 +33,7 @@ class RedditRequestService < APIRequestService
     ret = JSON.parse(res.body)
     ret["data"]["children"].each do |post|
       a = Article.new()
+      a.created_at = DateTime.now
       a.title = post["data"]["title"]
       a.source = "Reddit"
       a.link = post["data"]["url"]

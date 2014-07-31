@@ -1,7 +1,13 @@
 class ArticlesController < ApplicationController
+  def initialize
+    @last_update = Time.now
+  end
+
   def home
-    nprfeed()
-    redditfeed()
+    if four_hours_passed
+      nprfeed()
+      redditfeed()
+    end
     render :json => Article.all
   end
 
@@ -16,5 +22,11 @@ class ArticlesController < ApplicationController
     r = RedditRequestService.new()
     r.tech_subs()
     r.make_request()
+  end
+
+  def four_hours_passed
+    time_since_last = Time.now - @last_update
+    hours_since_last = time_since_last / (60*60)
+    hours_since_last >= 4
   end
 end
