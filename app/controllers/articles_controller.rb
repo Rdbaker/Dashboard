@@ -1,13 +1,12 @@
 class ArticlesController < ApplicationController
   def initialize
-    @last_update = Time.now
+    @timer = Rufus::Scheduler.new
+    @timer.every '2h' do
+      refresh_data
+    end
   end
 
   def home
-    if four_hours_passed
-      nprfeed()
-      redditfeed()
-    end
     render :json => Article.all
   end
 
@@ -24,9 +23,8 @@ class ArticlesController < ApplicationController
     r.make_request()
   end
 
-  def four_hours_passed
-    time_since_last = Time.now - @last_update
-    hours_since_last = time_since_last / (60*60)
-    hours_since_last >= 4
+  def refresh_data
+    nprfeed
+    redditfeed
   end
 end
