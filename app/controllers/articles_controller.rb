@@ -1,11 +1,4 @@
 class ArticlesController < ApplicationController
-  def initialize
-    @timer = Rufus::Scheduler.new
-    @timer.every '2h' do
-      refresh_data
-    end
-  end
-
   def home
     render :json => Article.all
   end
@@ -26,5 +19,6 @@ class ArticlesController < ApplicationController
   def refresh_data
     nprfeed
     redditfeed
+    render :json => Article.all
   end
 end

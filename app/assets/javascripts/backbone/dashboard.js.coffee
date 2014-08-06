@@ -9,3 +9,10 @@ window.Dashboard =
   Collections: {}
   Routers: {}
   Views: {}
+
+  init: () ->
+    new Dashboard.Routers.Router
+    Backbone.history.start()
+
+$ ->
+  Dashboard.init()
