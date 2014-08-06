@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(version: 20140714033930) do
   create_table "articles", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title"
     t.string   "source"
     t.string   "feed"
     t.string   "link"
     t.string   "date_posted"
     t.text     "content"
+    t.string   "title"
   end
 
 end
