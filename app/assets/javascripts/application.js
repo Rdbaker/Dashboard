@@ -17,5 +17,7 @@
 //= require backbone
 //= require bootstrap
 //= require ejs_production
+//= require moment
+//= require opentip-jquery
 //= require backbone/dashboard
 //= require_tree .
