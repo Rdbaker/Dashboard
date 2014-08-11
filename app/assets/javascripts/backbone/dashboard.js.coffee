@@ -24,7 +24,7 @@ window.Dashboard =
     },
     {
       link: 'http://i.imgur.com/Eourq.jpg'
-      about: "Boulder, Colorado has a very rich rock formation called the Flatirons. Geologistsestimate the age of this formation to be between 35 and 80 million years old, having been given their distinct shape by the Laramide Orogeny (a period of geologic mountain building which started 70 to 80 million years ago, most notably resulting in Laramie Mountains of eastery Wyoming)"
+      about: "Boulder, Colorado has a very rich rock formation called the Flatirons. Geologistsestimate the age of this formation to be between 35 and 80 million years old, having been given their distinct shape by the Laramide Orogeny (a period of geologic mountain building which started 70 to 80 million years ago, most notably resulting in Laramie Mountains of eastern Wyoming)"
     },
     {
       link: 'http://i.imgur.com/K73bkIP.jpg'
