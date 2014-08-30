@@ -28,8 +28,18 @@ class Dashboard.Views.HomeView extends Backbone.View
     setTimeout(@update_date, 3600000)
 
   update_background: () =>
-    image = Dashboard.Images[Math.round(Math.random()*(Dashboard.Images.length-1))]
-    $('#home-background').attr('src', image.link)
-    @about_image.setContent(image.about)
+    img_elt = $("#home-background")
+    image = @random_image()
+    while image.link == img_elt.src
+      image = @random_image()
+    img_elt.fadeOut(1000, () =>
+      img_elt.one('load', () =>
+        img_elt.fadeIn(1000)
+        @about_image.setContent(image.about)
+      ).attr('src', image.link)
+    )
     # call me again in 5 minutes
     setTimeout(@update_background, 300000)
+
+  random_image: () =>
+    Dashboard.Images[Math.round(Math.random()*(Dashboard.Images.length-1))]
